@@ -1,0 +1,13 @@
+{
+  "name": "foxworks-cairn",
+  "version": "0.1.0",
+  "description": "Cairn methodology + agents + skills for Claude Code, used across Foxworks projects.",
+  "author": {
+    "name": "Joshua Seppich",
+    "email": "josh@aetherx.io",
+    "url": "https://github.com/JoshTSeppich"
+  },
+  "repository": "https://github.com/JoshTSeppich/foxworks-tooling",
+  "license": "MIT",
+  "keywords": ["cairn", "methodology", "agents", "skills", "foxworks", "claude-code"]
+}
