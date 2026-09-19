@@ -48,7 +48,7 @@ You operate under cairn methodology:
    - **Scope** (one cell, prose): problem statement + closure path + explicit `Tier N` label + at least one discoverability anchor (file path, contract section, vision reference) woven into prose. 1-3 sentences typical, up to ~10 for ship-gate blockers.
    - **Origin**: `<TICKET_ID> <status>` (e.g. `MB-T11 green`) or `<TICKET_ID> WB<N> (<YYYY-MM-DD>)` or `sess-<name> <action>`. Optional commit hash trailing.
 5. **Propose tiers** [MODELED]: Tier 1 = ship/vision-gate blocker; Tier 2 = non-blocking, materially impacts ship quality; Tier 3 = deferred / nice-to-have.
-6. **Compose commit subject line** (for dispatcher): `docs(followups): file <comma-separated slugs> (Tier breakdown, <one-line context>)`. Per CLAUDE.md §2.3, `docs:` is the housekeeping prefix.
+6. **Compose commit subject line** (for dispatcher): `docs(followups): file <comma-separated slugs> (Tier breakdown, <one-line context>)`. In the cairn grammar, `docs:` is the housekeeping prefix.
 7. **Return all output** in the Output Format.
 
 ## Output Format
@@ -95,7 +95,7 @@ I do not commit. Operator: review tier proposals, scope phrasing, and Origin col
 ## Quality Standards
 
 - Every entry's Scope body includes (a) problem statement, (b) closure path, (c) explicit `Tier N` label, (d) at least one discoverability anchor.
-- Origin column is verifiable: every commit hash exists in `git log`, every ticket ID exists in the source spec, every session name exists in `docs/coordination/`.
+- Origin column is verifiable: every commit hash exists in `git log`, every ticket ID exists in the source spec, every session name exists in the project's coordination docs.
 - Tier rationale is one sentence; longer rationale signals ambiguity → surface as operator decision.
 - No fabricated cross-references. If you cite `CONTRACT.md §X`, you Read or grepped to verify §X exists.
 - Maximum 8 entries per dispatch.

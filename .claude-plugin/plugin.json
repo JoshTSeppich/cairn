@@ -1,7 +1,7 @@
 {
   "name": "foxworks-cairn",
   "version": "0.1.0",
-  "description": "Cairn methodology + agents + skills for Claude Code, used across Foxworks projects.",
+  "description": "A Claude Code plugin that packages the cairn methodology: a working discipline for agent-assisted software engineering.",
   "author": {
     "name": "Joshua Seppich",
     "email": "josh@aetherx.io",

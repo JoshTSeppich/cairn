@@ -76,10 +76,10 @@ When dispatching a sub-agent, the dispatcher must not assume the agent will foll
 
 ## Worked example
 
-Operator asks: "Does the `verifyToken` function exist in `dispatch-daemon/src/auth.ts`?"
+Operator asks: "Does the `verifyToken` function exist in `services/auth/src/auth.ts`?"
 
 Bad answer: "Yes, it's a standard auth pattern, you'd expect it to be there."
 
-Good answer: "[KNOWN] verifyToken exists at packages/dispatch-daemon/src/auth.ts:42; verified via Read. Signature: `function verifyToken(token: string): { sub: string } | null`."
+Good answer: "[KNOWN] verifyToken exists at services/auth/src/auth.ts:42; verified via Read. Signature: `function verifyToken(token: string): { sub: string } | null`."
 
-The good answer cites file_path:line, includes the signature observed, and labels the claim KNOWN. The bad answer extrapolates from convention and gets the question wrong if `dispatch-daemon` happens to use a different filename or function name.
+The good answer cites file_path:line, includes the signature observed, and labels the claim KNOWN. The bad answer extrapolates from convention and gets the question wrong if the service happens to use a different filename or function name.

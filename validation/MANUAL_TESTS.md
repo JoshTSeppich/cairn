@@ -1,6 +1,6 @@
 # foxworks-cairn — Manual Test Plan
 
-This is the runbook the operator runs after install to verify the plugin's 5 agents and 2 skills work as designed. Each test is observational: dispatch the agent or query the skill, observe whether CC behaves as expected, mark pass/fail. Failed tests get filed as `MB-F-*` followups in `FOLLOWUPS.md` (see P7 — Validation execution).
+This is the runbook the operator runs after install to verify the plugin's 5 agents and 1 skill work as designed. Each test is observational: dispatch the agent or query the skill, observe whether CC behaves as expected, mark pass/fail. Failed tests get filed as `MB-F-*` followups in `FOLLOWUPS.md` (see P7 — Validation execution).
 
 The harness cannot self-test agent triggering — Claude Code's agent dispatch is harness-controlled and not scriptable. Run the tests against a **fresh CC session** so observations aren't polluted by the session that built the plugin.
 
@@ -11,12 +11,10 @@ The harness cannot self-test agent triggering — Claude Code's agent dispatch i
 ### Path A — Local development install (v0.1.0 default)
 
 ```bash
-cc --plugin-dir /Users/joshuatseppich/Desktop/Automata/foxworks-tooling
+claude --plugin-dir /path/to/foxworks-tooling
 ```
 
-This loads the plugin from a local filesystem path without going through a marketplace. Documented in `~/.claude/plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/README.md:204-207`.
-
-If `cc` is not on PATH, use the full path to your Claude Code binary.
+This loads the plugin from a local filesystem path without going through a marketplace.
 
 ### Path B — Marketplace install (deferred to v0.2)
 
@@ -34,7 +32,7 @@ If none of these signals appear, the plugin did not load. Diagnose via:
 
 - Check the path you passed to `--plugin-dir` is absolute and points to the repo root (the directory containing `.claude-plugin/plugin.json`).
 - Check `cat .claude-plugin/plugin.json | python3 -m json.tool` returns valid JSON.
-- Try `cc --plugin-dir` with quoted path if the path contains spaces.
+- Try `claude --plugin-dir` with quoted path if the path contains spaces.
 
 ---
 
@@ -47,7 +45,7 @@ Each agent test follows the shape: sample prompt → expected behavior → verif
 **Sample prompt:**
 
 ```
-Verify whether the function `verifyToken` exists in `packages/dispatch-daemon/src/auth.ts` of the foxworks-dispatch repo. I'm about to claim it does in a commit body.
+Verify whether the function `verifyToken` exists in `src/auth.ts` of this repo. I'm about to claim it does in a commit body.
 ```
 
 **Expected behavior:**
@@ -70,13 +68,13 @@ If all three are Yes → pass. Any No → file as `MB-F-A1-<descriptor>` followu
 **Sample prompt:**
 
 ```
-Run a Phase 1 diagnose for ticket MB-T12 in foxworks-dispatch. The ticket spec is in docs/build-docs/CONDUCTOR_V3_RESCOPE.md and CLAUDE.md references it.
+Run a Phase 1 diagnose for ticket MB-T12. The ticket spec is in docs/tickets/MB-T12.md and CLAUDE.md references it.
 ```
 
 **Expected behavior:**
 
 - CC dispatches the `cairn-phase-1-diagnose` agent (blue color).
-- Agent reads the ticket spec, surveys foxworks-dispatch surfaces, returns a markdown document.
+- Agent reads the ticket spec, surveys the repo's surfaces, returns a markdown document.
 - Output includes sections: `# Phase 1 Diagnose — MB-T12: <title>`, `**Source:**`, `## Scope (verbatim from ticket)`, `## Surface Inventory`, `## Arbitration Questions`, `## Risks`, `## Acceptance Criteria (verbatim)`, `## HALT 0 Gate`.
 
 **Verification:**
@@ -91,7 +89,7 @@ Run a Phase 1 diagnose for ticket MB-T12 in foxworks-dispatch. The ticket spec i
 **Sample prompt:**
 
 ```
-Draft followups for MB-T12 based on its commit history. The commit range is the last 14 commits in foxworks-dispatch on the MB-T12 branch.
+Draft followups for MB-T12 based on its commit history. The commit range is the last 14 commits on the MB-T12 branch.
 ```
 
 **Expected behavior:**
@@ -112,12 +110,12 @@ Draft followups for MB-T12 based on its commit history. The commit range is the 
 **Sample prompt:**
 
 ```
-Triage these test failures in dispatch-workstation:
+Triage these test failures in the app package:
 
-- test/integration/zipper-2/splitter-persists.test.ts > "splitter persists across restart" — failed
-- test/integration/zipper-2/splitter-persists.test.ts > "default value when no state" — failed
+- test/integration/settings-persist.test.ts > "settings persist across restart" — failed
+- test/integration/settings-persist.test.ts > "default value when no state" — failed
 
-I'm at WB6 of MB-T12 with uncommitted changes. Test scope is `pnpm --filter dispatch-workstation test`.
+I'm at WB6 of MB-T12 with uncommitted changes. Test scope is `pnpm --filter app test`.
 ```
 
 **Expected behavior:**
@@ -143,7 +141,7 @@ I'm at WB6 of MB-T12 with uncommitted changes. Test scope is `pnpm --filter disp
 **Sample prompt:**
 
 ```
-Impact analysis for changing the `Session` schema in packages/dispatch-core/src/v3/schema.ts. I want to add a new optional field `recent_handoff: string | null`. Before I author the change, who imports `Session` and what's the risk?
+Impact analysis for changing the `Session` schema in packages/core/src/schema.ts. I want to add a new optional field `recent_handoff: string | null`. Before I author the change, who imports `Session` and what's the risk?
 ```
 
 **Expected behavior:**
@@ -163,7 +161,7 @@ Impact analysis for changing the `Session` schema in packages/dispatch-core/src/
 
 ---
 
-## §3 Per-skill tests (2 tests)
+## §3 Per-skill test (1 test)
 
 Skills auto-load when their description-keywords match the operator's prompt. Verify the skill activated by CC's response shape and content citations.
 
@@ -181,37 +179,14 @@ What's the cairn commit grammar? I see "red:", "green:", "spike:", "contract:", 
   - Lists all 5 verbs (red, green, spike, contract, refactor) with one-line definitions.
   - Names the subject format `<verb>(<ticket-or-phase>): <short description>`.
   - Notes that `docs:`, `chore:`, `merge:` are housekeeping prefixes that don't count as cairn-grammar.
-  - Cites foxworks-dispatch CLAUDE.md §2.3 as authoritative source.
+  - Cites the skill's SKILL.md as the source.
 
 **Verification:**
 
 - All 5 verbs named? (Yes / No)
 - Subject format named? (Yes / No)
 - Housekeeping prefixes mentioned? (Yes / No)
-- CLAUDE.md §2.3 cited? (Yes / No)
-
-### §3.2 `foxworks-conductor-codebase` skill
-
-**Sample query:**
-
-```
-What's the post-pull rebuild discipline in foxworks-dispatch? I just merged main and want to know what to run before workstation typecheck.
-```
-
-**Expected behavior:**
-
-- CC's response cites foxworks-conductor-codebase skill content. Specifically:
-  - Names the rule: run `pnpm --filter dispatch-core build` before workstation typecheck after merging.
-  - Explains why: workstation imports compiled `dispatch-core/dist/v3/schema.js`, not source; runtime ESM resolution requires the compiled `.js`.
-  - Cites the followup ticket `MB-F-DISPATCH-CORE-POST-PULL-REBUILD-DISCIPLINE`.
-  - Cites CLAUDE.md §3.4 as authoritative source.
-
-**Verification:**
-
-- Pnpm command stated correctly? (Yes / No)
-- Reason explained (dist vs src)? (Yes / No)
-- Followup ticket ID cited? (Yes / No)
-- CLAUDE.md §3.4 cited? (Yes / No)
+- SKILL.md cited? (Yes / No)
 
 ---
 
@@ -224,9 +199,8 @@ What's the post-pull rebuild discipline in foxworks-dispatch? I just merged main
 - [ ] §2.4 `cairn-test-failure-triage` — pass / fail (note any forbidden-command failures separately)
 - [ ] §2.5 `cairn-cross-package-impact` — pass / fail
 - [ ] §3.1 `cairn-methodology` skill — pass / fail
-- [ ] §3.2 `foxworks-conductor-codebase` skill — pass / fail
 
-Tally: __ passing / 7 tests.
+Tally: __ passing / 6 tests.
 
 ---
 

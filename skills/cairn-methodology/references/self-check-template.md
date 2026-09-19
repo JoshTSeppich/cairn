@@ -40,12 +40,12 @@ Self-check Q1-Q9:
 
 Each project that adopts cairn methodology should publish its own Q1-Q9 list at a documented location (typically `docs/build-docs/<project>_API_CONTRACT.md §10.5` or similar). The list above is the general template; project-specific lists swap in repo-specific risk surfaces.
 
-### Foxworks-dispatch example (CONDUCTOR_API_CONTRACT.md §10.5)
+### Example: a monorepo with parallel sessions
 
-The foxworks-dispatch list adds questions about:
+One project's list adds questions about:
 
 - Q7: parallel-cairn territory overlap (shared-working-tree concern).
-- Q8: direct-registry-write paths (PATCH /v2/sessions/:name/state vs registry.json edits).
+- Q8: direct-registry-write paths (API writes vs direct edits to the state file).
 
 These are repo-specific risk surfaces that wouldn't apply in a non-monorepo or non-parallel-session context.
 

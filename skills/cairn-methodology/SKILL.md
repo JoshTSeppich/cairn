@@ -6,7 +6,7 @@ version: 0.1.0
 
 # Cairn Methodology
 
-A discipline for software-engineering work with Claude Code — born in the foxworks-dispatch project, generalized in the foxworks-cairn plugin so any Foxworks (or Foxworks-adjacent) repo can adopt it cleanly.
+A discipline for software-engineering work with Claude Code. It was first codified in the Conductor project and is generalized here so any repo can adopt it.
 
 The methodology has ten disciplines. Each prevents a specific failure mode that emerges when AI assistants ship code without operator-grade rigor.
 
@@ -49,7 +49,7 @@ Five verbs are the minimum vocabulary for auditable commit logs:
 - **`contract:`** — modifies a frozen surface (operator-arbitrated only).
 - **`refactor:`** — asserts behavior preservation.
 
-Subject format: `<verb>(<ticket-or-phase>): <short description>` — for example, `green(MB-T12): WB6 — tile-grid.tsx top-level grid + N-tile rendering + unit tests`.
+Subject format: `<verb>(<ticket-or-phase>): <short description>` — for example, `green(T12): WB6 — grid component + unit tests`.
 
 `docs:`, `chore:`, and `merge:` are permitted for housekeeping but do not count as cairn-grammar commits and do not require Q1-Q9 self-checks.
 
@@ -67,7 +67,7 @@ Every cairn-grammar commit body answers nine questions. The general template (ad
 8. Created or modified files in `~/.claude/` directly?
 9. Work during an unauthorized halt?
 
-Project-specific Q1-Q9 lists swap in repo-specific risk surfaces. The foxworks-dispatch list (CONDUCTOR_API_CONTRACT.md §10.5) adds questions about parallel-cairn territory and direct-registry-write paths.
+Project-specific Q1-Q9 lists swap in repo-specific risk surfaces. A monorepo with parallel sessions, for example, adds questions about territory overlap and direct writes to shared state.
 
 ### 5. Plan-mode discipline
 
@@ -106,7 +106,7 @@ Always use explicit `git add <path>` for every staged file. Pre-commit territory
 
 ### 9. Frozen contracts
 
-Some surfaces are operator-arbitrated only; CC never modifies them. Foxworks-dispatch declares its frozen surfaces in CLAUDE.md §1 (REGISTRY.md §2, CONDUCTOR_API_CONTRACT.md, dispatch-core schema spine, WORKSTATION_CONTRACT.md). Other repos adopt the same pattern: CLAUDE.md §1 lists the frozen surfaces; modifications go through `contract:` commits with explicit operator approval.
+Some surfaces are operator-arbitrated only; CC never modifies them. The pattern: the project's CLAUDE.md §1 lists the frozen surfaces; modifications go through `contract:` commits with explicit operator approval.
 
 If a proposed change would touch a frozen surface, halt and surface for operator arbitration before writing.
 
@@ -121,24 +121,9 @@ Honest framing on phase completion:
 
 Don't force "Improved" where evidence doesn't support it. The classification is operator-facing; honest framing > optimistic framing.
 
-## Authoritative source map
+## Provenance
 
-The disciplines were first codified in `foxworks-dispatch/CLAUDE.md §2` and `docs/build-docs/CONDUCTOR_API_CONTRACT.md §10`:
-
-| Discipline | Citation |
-|------------|----------|
-| Anti-fabrication | CLAUDE.md §2.1 (L21-24) |
-| Confidence labels | CLAUDE.md §2.2 (L26-32); CONDUCTOR_API_CONTRACT.md §10.1 |
-| Cairn grammar | CLAUDE.md §2.3 (L34-44) |
-| Self-check Q1-Q9 | CONDUCTOR_API_CONTRACT.md §10.5 (canonical); CLAUDE.md §2.4 (mirror) |
-| Plan-mode discipline | foxworks-cairn build prompt §1.5 (no prior CLAUDE.md citation) |
-| Halt discipline | CLAUDE.md §2.5 + §4.2 HALT gates |
-| Per-commit-push | CLAUDE.md §2.6 |
-| Per-path git add | CLAUDE.md §2.7 |
-| Frozen contracts | CLAUDE.md §1 |
-| Outcome classifications | CLAUDE.md §2.11 |
-
-When applying cairn in a non-foxworks-dispatch repo, the disciplines are general; the citations above are pointers for new contributors learning the methodology.
+The disciplines were first written down in the Conductor project's CLAUDE.md and API contract (https://github.com/JoshTSeppich/Conductor). This skill is the general form. Each project's own CLAUDE.md lists its frozen surfaces and any project-specific self-check questions.
 
 ## Additional Resources
 

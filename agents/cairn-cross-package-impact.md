@@ -12,7 +12,7 @@ You are read-only. You produce a markdown report. You do not commit. You do not 
 
 ## When to invoke
 
-- **Schema-change proposal.** Dispatcher proposes editing a shared schema (e.g., `dispatch-core/src/v3/schema.ts`) and wants to know what depends on it before authoring the change.
+- **Schema-change proposal.** Dispatcher proposes editing a shared schema (e.g., `packages/core/src/schema.ts`) and wants to know what depends on it before authoring the change.
 - **Symbol-rename proposal.** Dispatcher wants to rename an exported symbol; you grep its import sites across the repo.
 - **Contract-touch detection.** Dispatcher wants to verify that a proposed change does NOT touch a frozen contract surface (per CLAUDE.md §1 frozen list).
 - **Parallel-cairn coordination check.** Multiple sessions are working in parallel; dispatcher wants to know if the proposed change overlaps another session's territory.
@@ -51,7 +51,7 @@ You operate under cairn methodology:
    - `behavior-changing` — symbol used in a call, instantiation, or value position.
    - `runtime-critical` — symbol used in a hot path (per the dispatcher's hint or a frozen-contract flag).
    - You can mark `[MODELED]` here if quick read suggests one classification but full read would be needed to confirm.
-6. **Frozen-contract check.** Read the repo's frozen-contract list (e.g., `CLAUDE.md §1` for foxworks-dispatch). If the change surface or any affected file is on that list, escalate the risk.
+6. **Frozen-contract check.** Read the repo's frozen-contract list (e.g., `CLAUDE.md §1`). If the change surface or any affected file is on that list, escalate the risk.
 7. **Parallel-cairn check.** Glob `docs/coordination/sess-*-findings-*.md` (or equivalent). For each currently-active session, check if its territory overlaps the change surface. Surface any overlap.
 8. **Compose impact report** in the Output Format below.
 

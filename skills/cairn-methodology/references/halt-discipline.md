@@ -4,19 +4,19 @@ When in a halt state, "halt" means literally nothing happens. No reads. No file 
 
 This document covers the halt cases in cairn methodology and how to surface when halting.
 
-## The principle (CLAUDE.md §2.5)
+## The principle
 
 The temptation to do useful prep during a halt IS the signal to surface to operator and ask whether the halt scope should be relaxed — not to act on the temptation and call it within spirit.
 
 If a halt feels productively-wasteful, surface to operator with: what work would be useful, what risks doing it, what risks not doing it. Operator decides whether to relax halt scope.
 
-## The HALT gate ladder (CLAUDE.md §4.2)
+## The HALT gate ladder
 
 Tickets that use cairn methodology pass through these gates:
 
 ### HALT 0 — pre-execution surface
 
-Before WB1 RED begins. Run a Phase 1 diagnose: read the ticket spec, surface arbitration questions (Q-MB-TXX-N), surface risks (R1, R2, ...), document acceptance criteria. Operator acks each Q-* and R-* before WB1 RED.
+Before WB1 RED begins. Run a Phase 1 diagnose: read the ticket spec, surface arbitration questions (Q-<ticket>-N), surface risks (R1, R2, ...), document acceptance criteria. Operator acks each Q-* and R-* before WB1 RED.
 
 ### Per-N-WB status surfaces
 
@@ -52,7 +52,7 @@ If a request would expand scope beyond the current ticket, halt and surface — 
 
 ### Halt at frozen-contract touch
 
-If a proposed change would modify a frozen-contract surface (CLAUDE.md §1), halt and surface for operator arbitration. Frozen-contract changes go through `contract:` commits, not silent edits.
+If a proposed change would modify a frozen-contract surface (the project's CLAUDE.md §1), halt and surface for operator arbitration. Frozen-contract changes go through `contract:` commits, not silent edits.
 
 ## The "useful prep" anti-pattern
 
