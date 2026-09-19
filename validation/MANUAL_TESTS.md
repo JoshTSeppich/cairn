@@ -1,4 +1,4 @@
-# foxworks-cairn — Manual Test Plan
+# cairn — Manual Test Plan
 
 This is the runbook the operator runs after install to verify the plugin's 5 agents and 1 skill work as designed. Each test is observational: dispatch the agent or query the skill, observe whether CC behaves as expected, mark pass/fail. Failed tests get filed as `MB-F-*` followups in `FOLLOWUPS.md` (see P7 — Validation execution).
 
@@ -11,20 +11,20 @@ The harness cannot self-test agent triggering — Claude Code's agent dispatch i
 ### Path A — Local development install (v0.1.0 default)
 
 ```bash
-claude --plugin-dir /path/to/foxworks-tooling
+claude --plugin-dir /path/to/cairn
 ```
 
 This loads the plugin from a local filesystem path without going through a marketplace.
 
 ### Path B — Marketplace install (deferred to v0.2)
 
-The standard marketplace install command (`/plugin install <name>@<marketplace>`) requires the source repo to be structured as a *marketplace* containing `plugins/<name>/` subdirectories. `foxworks-tooling` is structured as a single plugin, not a marketplace. A v0.2 release could either (a) restructure the repo as a marketplace or (b) submit `foxworks-cairn` to the official marketplace. Neither is in v0.1.0 scope.
+The standard marketplace install command (`/plugin install <name>@<marketplace>`) requires the source repo to be structured as a *marketplace* containing `plugins/<name>/` subdirectories. `cairn` is structured as a single plugin, not a marketplace. A v0.2 release could either (a) restructure the repo as a marketplace or (b) submit `cairn` to the official marketplace. Neither is in v0.1.0 scope.
 
 ### Verifying install
 
 After running the Path A command, verify install via:
 
-1. **CC startup banner** — does CC print "Loaded plugin: foxworks-cairn" or similar at startup? [verification mechanism]
+1. **CC startup banner** — does CC print "Loaded plugin: cairn" or similar at startup? [verification mechanism]
 2. **Agent chooser** — when CC dispatches an agent, does the chooser list any of the 5 cairn agents? Run a sample prompt from §2 below and observe.
 3. **Skill auto-load** — does CC's response cite cairn-methodology content when asked methodology questions? Run a sample query from §3 below and observe.
 

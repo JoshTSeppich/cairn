@@ -1,13 +1,13 @@
 {
-  "name": "foxworks-cairn",
+  "name": "cairn",
   "version": "0.1.0",
   "description": "A Claude Code plugin that packages the cairn methodology: a working discipline for agent-assisted software engineering.",
   "author": {
     "name": "Joshua Seppich",
-    "email": "josh@aetherx.io",
+    "email": "joshuatseppich@gmail.com",
     "url": "https://github.com/JoshTSeppich"
   },
-  "repository": "https://github.com/JoshTSeppich/foxworks-tooling",
+  "repository": "https://github.com/JoshTSeppich/cairn",
   "license": "MIT",
-  "keywords": ["cairn", "methodology", "agents", "skills", "foxworks", "claude-code"]
+  "keywords": ["cairn", "methodology", "agents", "skills", "claude-code"]
 }

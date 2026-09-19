@@ -1,4 +1,4 @@
-# foxworks-tooling — Followups
+# cairn — Followups
 
 `MB-F-*` followup entries surfaced during plugin validation and future maintenance work. Three-column table: ID, Scope, Origin.
 
